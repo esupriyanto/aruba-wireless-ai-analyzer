@@ -120,9 +120,13 @@ class ArubaClient:
     ) -> ClientListResponse:
         """Return the list of wireless clients."""
         if self._mock_mode:
+            all_clients = mock_data.generate_clients()
+            total = len(all_clients)
+            start = (page - 1) * page_size
+            end = start + page_size
             return ClientListResponse(
-                total=0,
-                clients=mock_data.generate_clients(),
+                total=total,
+                clients=all_clients[start:end],
                 page=page,
                 page_size=page_size,
             )

@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.routers import access_points, clients, events, remediation
 
 
 @asynccontextmanager
@@ -30,6 +31,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- API Routers (Phase 4) ---
+app.include_router(clients.router, prefix="/api/v1")
+app.include_router(access_points.router, prefix="/api/v1")
+app.include_router(events.router, prefix="/api/v1")
+app.include_router(remediation.router, prefix="/api/v1")
 
 
 @app.get("/health")
