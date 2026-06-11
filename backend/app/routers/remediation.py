@@ -3,10 +3,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from app.dependencies import get_analyzer, get_aruba_client
+from app.dependencies import get_analyzer, get_aruba_client, get_hermes_agent
 from app.models.issue import AlertListResponse
 from app.services.analyzer import Analyzer
 from app.services.aruba_client import ArubaClient
+from app.services.hermes_agent import HermesAgent
 
 router = APIRouter(prefix="/remediation", tags=["Remediation"])
 
@@ -87,13 +88,9 @@ async def analyze(
 @router.post("/execute", response_model=ExecuteResponse)
 async def execute(
     body: ExecuteRequest,
+    hermes: HermesAgent = Depends(get_hermes_agent),
 ) -> ExecuteResponse:
-    """Execute a remediation action (stub — always returns accepted).
-
-    In a full implementation this would delegate to the Hermes AI Agent
-    which would push configuration or run SSH commands on the controller.
-    """
-    # Validate action type
+    """Execute a remediation action via Hermes AI Agent."""
     allowed_actions = {"restart_ap", "adjust_power", "kick_client", "clear_rogue"}
     if body.action not in allowed_actions:
         raise HTTPException(
@@ -104,13 +101,14 @@ async def execute(
             ),
         )
 
+    result = await hermes.execute_remediation(
+        actions=[body.action],
+        target=body.issue_id,
+    )
+
     return ExecuteResponse(
-        status="accepted",
-        message=(
-            f"Remediation action '{body.action}' for issue '{body.issue_id}' "
-            "has been queued. In production this would be executed by the "
-            "Hermes AI Agent."
-        ),
+        status=result.get("status", "accepted"),
+        message=result.get("message", "Remediation queued."),
         issue_id=body.issue_id,
         action=body.action,
     )

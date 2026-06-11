@@ -1,0 +1,20 @@
+## Remediation Action Template
+
+### Target: {target}
+### Actions: {actions}
+
+### Pre-Checks
+- Verify target AP/client is still in the reported state
+- Confirm no maintenance window conflicts
+- Check controller reachability
+
+### Execution Steps
+{steps}
+
+### Post-Checks
+- Verify the issue is resolved
+- Confirm no new issues introduced
+- Log the action in audit trail
+
+### Rollback Plan
+{rollback}

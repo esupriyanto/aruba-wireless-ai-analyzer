@@ -1,4 +1,4 @@
-export default function AlertPanel({ alerts }) {
+export default function AlertPanel({ alerts, onSelectIssue, selectedIssue }) {
   if (!alerts.length) {
     return (
       <div className="panel">
@@ -12,7 +12,16 @@ export default function AlertPanel({ alerts }) {
     <div className="panel">
       <h2>Alerts ({alerts.length})</h2>
       {alerts.map((a) => (
-        <div className="alert-item" key={a.id}>
+        <div
+          className="alert-item"
+          key={a.id}
+          onClick={() => onSelectIssue?.(a)}
+          style={{
+            cursor: 'pointer',
+            background: selectedIssue?.id === a.id ? '#1e293b' : 'transparent',
+            borderRadius: '4px',
+          }}
+        >
           <span className={`badge badge-${a.severity}`}>{a.severity}</span>
           <div className="alert-body">
             <div className="title">{a.title}</div>

@@ -9,6 +9,7 @@ from typing import AsyncGenerator
 from app.config import settings, Settings
 from app.services.analyzer import Analyzer
 from app.services.aruba_client import ArubaClient
+from app.services.hermes_agent import HermesAgent
 
 
 def get_settings() -> Settings:
@@ -29,3 +30,8 @@ async def get_aruba_client() -> AsyncGenerator[ArubaClient, None]:
 def get_analyzer() -> Analyzer:
     """Return a fresh Analyzer instance (stateless, safe to create per-request)."""
     return Analyzer()
+
+
+def get_hermes_agent() -> HermesAgent:
+    """Return a fresh HermesAgent instance."""
+    return HermesAgent()

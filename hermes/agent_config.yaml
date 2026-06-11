@@ -1,0 +1,81 @@
+# Hermes Agent Configuration
+# LLM and tool definitions for Aruba Wireless AI Analyzer
+
+llm:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+  temperature: 0.2
+  max_tokens: 2048
+  base_url: https://openrouter.ai/api/v1
+
+tools:
+  - name: aruba_ssh
+    description: "Execute CLI commands on Aruba controller via SSH"
+    parameters:
+      type: object
+      properties:
+        host:
+          type: string
+          description: "Controller IP or hostname"
+        command:
+          type: string
+          description: "CLI command to execute"
+      required: [host, command]
+
+  - name: aruba_rest_action
+    description: "Call Aruba REST API to perform configuration changes"
+    parameters:
+      type: object
+      properties:
+        endpoint:
+          type: string
+          description: "REST API endpoint path"
+        method:
+          type: string
+          enum: [GET, POST, PUT, DELETE]
+        payload:
+          type: object
+          description: "Request body for POST/PUT"
+      required: [endpoint, method]
+
+  - name: log_analyzer
+    description: "Analyze controller/syslog logs for patterns"
+    parameters:
+      type: object
+      properties:
+        log_source:
+          type: string
+          description: "Log file path or syslog server"
+        pattern:
+          type: string
+          description: "Regex pattern to search"
+        hours:
+          type: integer
+          description: "Lookback window in hours"
+      required: [log_source]
+
+  - name: get_client_details
+    description: "Retrieve detailed client information from controller"
+    parameters:
+      type: object
+      properties:
+        mac:
+          type: string
+          description: "Client MAC address"
+      required: [mac]
+
+diagnosis:
+  output_format: |
+    Diagnosis: <one sentence summary>
+    Root Cause: <one sentence>
+    Impact: <one sentence>
+    Recommendation: <one sentence>
+
+remediation:
+  allowed_actions:
+    - restart_ap
+    - adjust_power
+    - kick_client
+    - clear_rogue
+    - change_channel
+    - disable_radio

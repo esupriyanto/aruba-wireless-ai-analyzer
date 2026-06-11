@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useAruba } from '../hooks/useAruba'
 import ClientTable from '../components/ClientTable'
 import APHealthCard from '../components/APHealthCard'
@@ -8,6 +9,7 @@ import AIInsightPanel from '../components/AIInsightPanel'
 
 export default function Dashboard() {
   const { clients, aps, alerts, loading, error, lastUpdated } = useAruba()
+  const [selectedIssue, setSelectedIssue] = useState(null)
 
   return (
     <div>
@@ -40,8 +42,8 @@ export default function Dashboard() {
 
         {/* Alerts + AI */}
         <div className="charts-row" style={{ marginBottom: '1.5rem' }}>
-          <AlertPanel alerts={alerts} />
-          <AIInsightPanel />
+          <AlertPanel alerts={alerts} onSelectIssue={setSelectedIssue} selectedIssue={selectedIssue} />
+          <AIInsightPanel selectedIssue={selectedIssue} />
         </div>
 
         {/* Charts */}
