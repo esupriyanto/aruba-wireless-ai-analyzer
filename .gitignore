@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+*.so
+venv/
+.venv/
+env/
+
+# Node
+node_modules/
+frontend/build/
+frontend/dist/
+frontend/.cache/
+.npm
+.yarn-integrity
+
+# Docker
+.docker/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+*.cover
+
+# Logs
+*.log
+logs/
