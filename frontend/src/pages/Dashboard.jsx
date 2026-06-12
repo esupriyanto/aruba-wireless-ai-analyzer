@@ -6,22 +6,78 @@ import AlertPanel from '../components/AlertPanel'
 import RSSIChart from '../components/RSSIChart'
 import ChannelHeatmap from '../components/ChannelHeatmap'
 import AIInsightPanel from '../components/AIInsightPanel'
+import SearchBar from '../components/SearchBar'
+import DeviceDiagnosticPanel from '../components/DeviceDiagnosticPanel'
+
+const API = '/api/v1'
 
 export default function Dashboard() {
   const { clients, aps, alerts, loading, error, lastUpdated } = useAruba()
   const [selectedIssue, setSelectedIssue] = useState(null)
+  const [ SearchResult, setSearchResult] = useState(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+
+  const handleSearch = async (query) => {
+    setSearchLoading(true)
+    setSearchResult(null)
+    try {
+      const url = `${API}/search?query=${encodeURIComponent(query)}`
+      const res = await fetch(url)
+      if (!res.ok) throw new Error('Search failed')
+      const data = await res.json()
+      setSearchResult(data)
+    } catch (err) {
+      console.error('Search error:', err)
+      setSearchResult(null)
+    } finally {
+      setSearchLoading(false)
+    }
+  }
+
+  const handleRemediate = async (action) => {
+    if (!selectedIssue) return
+    const payload = {
+      issue_id: selectedIssue,
+      action: action.action,
+      analysis_results: {
+        action: action.action,
+        label: action.label,
+      },
+    }
+    const res = await fetch(`${API}/remediation/execute`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    if (!res.ok) throw new Error('Remediation failed')
+    return res.json()
+  }
 
   return (
     <div>
-      <div className="header">
-        <h1>Aruba Wireless AI Analyzer</h1>
+      <div className="header" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+        <h1 style={{ flex: '1 1 auto', minWidth: '200px' }}>Aruba Wireless AI Analyzer</h1>
         <nav>
           <a href="/">Dashboard</a>
-          <a href="/audit">Audit Log</a>
+          <a href="/audit" style={{ marginLeft: '1.5rem' }}>Audit Log</a>
         </nav>
       </div>
 
-      <div className="container">
+      {/* Search Bar */}
+      <div style={{
+        background: '#1e293b', borderRadius: '8px', padding: '0.75rem',
+        marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem',
+      }}>
+        <SearchBar onSearch={handleSearch} />
+        {searchLoading && <span style={{ color: '#64748b', fontSize: '0.85rem' }}>⏳ Searching...</span>}
+      </div>
+
+      {/* Search Result */}
+      {!searchLoading && SearchResult && (
+        <DeviceDiagnosticPanel result={SearchResult} onRemediate={handleRemediate} />
+      )}
+
+      <div className="container" style={SearchResult ? { opacity: 0.9 } : {}}>
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: '#f87171' }}>Error: {error}</p>}
         {lastUpdated && (

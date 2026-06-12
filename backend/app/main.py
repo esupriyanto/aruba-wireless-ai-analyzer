@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.middleware.error_handler import error_handler_middleware
 from app.middleware.logging import logging_middleware
-from app.routers import access_points, audit_log, clients, events, remediation
+from app.routers import access_points, audit_log, clients, events, remediation, search
 
 # Configure structured logging
 logging.basicConfig(
@@ -53,6 +53,7 @@ app.include_router(access_points.router, prefix="/api/v1")
 app.include_router(events.router, prefix="/api/v1")
 app.include_router(remediation.router, prefix="/api/v1")
 app.include_router(audit_log.router, prefix="/api/v1")
+app.include_router(search.router, prefix="/api/v1")
 
 
 @app.get("/health")
