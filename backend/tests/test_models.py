@@ -2,10 +2,10 @@
 
 from datetime import datetime
 
-from backend.app.models.common import TimeSeriesPoint
-from backend.app.models.client import ClientInfo, ClientStats, ClientListResponse, ClientStatus
-from backend.app.models.ap import AccessPoint, APListResponse, APStatus
-from backend.app.models.issue import Issue, IssueSeverity, IssueCategory, AlertListResponse
+from app.models.common import TimeSeriesPoint
+from app.models.client import ClientInfo, ClientStats, ClientListResponse, ClientStatus
+from app.models.ap import AccessPoint, APListResponse, APStatus
+from app.models.issue import Issue, IssueSeverity, IssueCategory, AlertListResponse
 
 
 class TestTimeSeriesPoint:

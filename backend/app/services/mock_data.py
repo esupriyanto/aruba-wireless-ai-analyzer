@@ -8,10 +8,10 @@ Includes edge cases: clients with RSSI < -75 dBm, APs with utilization > 80%.
 import random
 from datetime import datetime, timedelta
 
-from backend.app.models.client import ClientInfo, ClientStatus
-from backend.app.models.ap import AccessPoint, APStatus
-from backend.app.models.issue import Issue, IssueSeverity, IssueCategory
-from backend.app.models.common import TimeSeriesPoint
+from app.models.client import ClientInfo, ClientStatus
+from app.models.ap import AccessPoint, APStatus
+from app.models.issue import Issue, IssueSeverity, IssueCategory
+from app.models.common import TimeSeriesPoint
 
 
 def _random_mac(rng: random.Random) -> str:

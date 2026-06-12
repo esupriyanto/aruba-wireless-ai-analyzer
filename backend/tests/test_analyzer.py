@@ -2,10 +2,10 @@
 
 import pytest
 
-from backend.app.services.analyzer import Analyzer
-from backend.app.models.client import ClientInfo, ClientStatus
-from backend.app.models.ap import AccessPoint, APStatus
-from backend.app.models.issue import (
+from app.services.analyzer import Analyzer
+from app.models.client import ClientInfo, ClientStatus
+from app.models.ap import AccessPoint, APStatus
+from app.models.issue import (
     AlertListResponse,
     IssueCategory,
     IssueSeverity,

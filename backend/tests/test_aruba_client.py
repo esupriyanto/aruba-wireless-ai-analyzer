@@ -5,10 +5,10 @@ import pytest_asyncio
 import httpx
 import respx
 
-from backend.app.services.aruba_client import ArubaClient
-from backend.app.models.client import ClientInfo, ClientListResponse
-from backend.app.models.ap import APListResponse
-from backend.app.models.common import TimeSeriesPoint
+from app.services.aruba_client import ArubaClient
+from app.models.client import ClientInfo, ClientListResponse
+from app.models.ap import APListResponse
+from app.models.common import TimeSeriesPoint
 
 
 # ------------------------------------------------------------------

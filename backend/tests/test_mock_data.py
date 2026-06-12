@@ -2,11 +2,11 @@
 
 import re
 
-from backend.app.models.client import ClientInfo
-from backend.app.models.ap import AccessPoint
-from backend.app.models.issue import Issue, IssueSeverity, IssueCategory
-from backend.app.models.common import TimeSeriesPoint
-from backend.app.services.mock_data import (
+from app.models.client import ClientInfo
+from app.models.ap import AccessPoint
+from app.models.issue import Issue, IssueSeverity, IssueCategory
+from app.models.common import TimeSeriesPoint
+from app.services.mock_data import (
     generate_clients,
     generate_access_points,
     generate_issues,

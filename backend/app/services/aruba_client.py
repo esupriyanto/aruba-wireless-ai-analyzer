@@ -12,11 +12,11 @@ from datetime import datetime
 
 import httpx
 
-from backend.app.config import settings
-from backend.app.models.ap import APListResponse, AccessPoint
-from backend.app.models.client import ClientInfo, ClientListResponse
-from backend.app.models.common import TimeSeriesPoint
-from backend.app.services import mock_data
+from app.config import settings
+from app.models.ap import APListResponse, AccessPoint
+from app.models.client import ClientInfo, ClientListResponse
+from app.models.common import TimeSeriesPoint
+from app.services import mock_data
 
 logger = logging.getLogger(__name__)
 

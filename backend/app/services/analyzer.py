@@ -8,10 +8,10 @@ returns a list of detected issues.
 import logging
 from datetime import datetime, timedelta
 
-from backend.app.config import settings
-from backend.app.models.ap import APStatus, AccessPoint
-from backend.app.models.client import ClientInfo, ClientStatus
-from backend.app.models.issue import (
+from app.config import settings
+from app.models.ap import APStatus, AccessPoint
+from app.models.client import ClientInfo, ClientStatus
+from app.models.issue import (
     AlertListResponse,
     Issue,
     IssueCategory,
