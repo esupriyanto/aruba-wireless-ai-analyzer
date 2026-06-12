@@ -1,0 +1,21 @@
+{
+  "description": "Sample ArubaOS 8.x real API response for GET /v1/monitoring/events",
+  "_global_result": { "status": "0" },
+  "events": [
+    {
+      "id": "EVT-0001",
+      "event_id": "EVT-0001",
+      "severity": "warning",
+      "message": "Client aa:bb:cc:dd:ee:02 weak RSSI detected",
+      "description": "Client aa:bb:cc:dd:ee:02 weak RSSI detected",
+      "timestamp": "2026-03-15T10:30:00",
+      "time": "2026-03-15T10:30:00"
+    },
+    {
+      "id": "EVT-0002",
+      "severity": "info",
+      "message": "AP-001 channel change 36→40",
+      "timestamp": "2026-03-15T10:25:00"
+    }
+  ]
+}

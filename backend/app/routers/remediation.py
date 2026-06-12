@@ -7,6 +7,7 @@ from app.dependencies import get_analyzer, get_aruba_client, get_hermes_agent
 from app.models.issue import AlertListResponse
 from app.services.analyzer import Analyzer
 from app.services.aruba_client import ArubaClient
+from app.services.audit_log import log_action
 from app.services.hermes_agent import HermesAgent
 
 router = APIRouter(prefix="/remediation", tags=["Remediation"])
@@ -104,6 +105,14 @@ async def execute(
     result = await hermes.execute_remediation(
         actions=[body.action],
         target=body.issue_id,
+    )
+
+    # Log to audit database
+    log_action(
+        issue_id=body.issue_id,
+        action=body.action,
+        status=result.get("status", "accepted"),
+        message=result.get("message", ""),
     )
 
     return ExecuteResponse(

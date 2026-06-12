@@ -1,0 +1,45 @@
+{
+  "description": "Sample ArubaOS 8.x real API response for GET /v1/monitoring/aps",
+  "_global_result": { "status": "0", "status_str": "Success" },
+  "access_points": [
+    {
+      "name": "AP-001",
+      "ap_model": "AP-535",
+      "model": "AP-535",
+      "serial": "CNG1234ABC",
+      "serial_number": "CNG1234ABC",
+      "ip_address": "10.0.0.101",
+      "ip": "10.0.0.101",
+      "status": "up",
+      "group": "Campus-APs",
+      "site": "HQ-Building-A",
+      "client_count": 12,
+      "num_clients": 12,
+      "utilization": 45,
+      "channel_utilization": 45,
+      "power": 18,
+      "tx_power": 18,
+      "band": "dual-band",
+      "channel": 36,
+      "frequency": 5180,
+      "uptime": 86400,
+      "firmware": "8.10.0.5",
+      "version": "8.10.0.5"
+    },
+    {
+      "name": "AP-002",
+      "model": "AP-515",
+      "serial": "CNG5678DEF",
+      "ip_address": "10.0.0.102",
+      "status": "up",
+      "group": "Campus-APs",
+      "client_count": 8,
+      "utilization": 82,
+      "tx_power": 15,
+      "band": "5GHz",
+      "channel": 149,
+      "uptime": 43200
+    }
+  ],
+  "total": 2
+}

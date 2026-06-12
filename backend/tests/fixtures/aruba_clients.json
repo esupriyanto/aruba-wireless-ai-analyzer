@@ -1,0 +1,52 @@
+{
+  "description": "Sample ArubaOS 8.x real API response for GET /v1/monitoring/clients",
+  "_global_result": { "status": "0", "status_str": "Success" },
+  "clients": [
+    {
+      "mac": "aa:bb:cc:dd:ee:01",
+      "macaddr": "aa:bb:cc:dd:ee:01",
+      "ip": "10.0.1.101",
+      "ip_address": "10.0.1.101",
+      "ssid": "Corp-WiFi",
+      "essid": "Corp-WiFi",
+      "ap_name": "AP-001",
+      "ap": "AP-001",
+      "band": "5GHz",
+      "radio_band": "5GHz",
+      "channel": 36,
+      "rssi": -62,
+      "rssi_dbm": -62,
+      "snr": 35,
+      "tx_rate": 400,
+      "txrate": 400,
+      "rx_rate": 350,
+      "rxrate": 350,
+      "vlan": 100,
+      "role": "employee",
+      "username": "john.doe",
+      "user": "john.doe",
+      "status": "connected",
+      "authentication": "WPA2-Enterprise",
+      "auth_type": "WPA2-Enterprise",
+      "last_seen": "2026-03-15T10:30:00",
+      "last_activity": "2026-03-15T10:30:00",
+      "uptime": 3600
+    },
+    {
+      "mac": "aa:bb:cc:dd:ee:02",
+      "ip": "10.0.1.102",
+      "ssid": "Corp-WiFi",
+      "ap_name": "AP-002",
+      "band": "2.4GHz",
+      "channel": 6,
+      "rssi": -78,
+      "snr": 18,
+      "tx_rate": 72,
+      "rx_rate": 65,
+      "status": "connected",
+      "auth_type": "WPA2-PSK",
+      "last_seen": "2026-03-15T10:28:00"
+    }
+  ],
+  "total": 2
+}
